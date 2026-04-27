@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulldog Wallet</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h2 id="username"></h2>
+        <p>Account Overview</p>
+    </div>
+
+    <div class="card">
+        <div class="card-top">
+            <span id="bank"></span>
+            <span id="network"></span>
+        </div>
+
+        <div class="card-number" id="cardNumber"></div>
+
+        <div class="card-bottom">
+            <div>
+                <p>Holder</p>
+                <h4 id="cardHolder"></h4>
+            </div>
+            <div>
+                <p>Expires</p>
+                <h4 id="expiry"></h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="balance-box">
+        <p>Balance</p>
+        <h1 id="balance"></h1>
+    </div>
+
+    <div class="details">
+        <div class="detail-item">
+            <p>Account</p>
+            <h4 id="accountNumber"></h4>
+        </div>
+
+        <div class="detail-item">
+            <p>Routing</p>
+            <h4 id="routingNumber"></h4>
+        </div>
+
+        <div class="detail-item">
+            <p>Type</p>
+            <h4 id="accountType"></h4>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button>Send</button>
+        <button>History</button>
+    </div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
