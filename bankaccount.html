@@ -1,0 +1,14 @@
+  <!-- BANK ACCOUNT SCREEN -->
+    <div class="wrapper" id="bankScreen" style="display:none;">
+        <h2>Welcome, <span id="displayUser"></span></h2>
+
+        <p class="balance">Balance: $<span id="balance">0.00</span></p>
+
+        <input id="amount" type="number" placeholder="Enter amount">
+
+        <button onclick="deposit()" class="btn">Deposit</button>
+        <button onclick="withdraw()" class="btn">Withdraw</button>
+
+        <h3>Transaction History</h3>
+        <div id="history" class="history"></div>
+    </div>
