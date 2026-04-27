@@ -13,32 +13,3 @@
         <div id="history" class="history"></div>
     </div>
 
- // UPDATE UI
-    function updateUI(message) {
-        document.getElementById("balance").innerText = account.balance.toFixed(2);
-
-        account.history.push(message);
-        document.getElementById("history").innerHTML =
-            account.history.map(item => `<p>${item}</p>`).join("");
-
-        document.getElementById("amount").value = "";
-    }
-
-    // DEPOSIT
-    function deposit() {
-        const amount = parseFloat(document.getElementById("amount").value);
-        if (amount <= 0) return alert("Enter a valid amount");
-
-        account.balance += amount;
-        updateUI("Deposited $" + amount.toFixed(2));
-    }
-
-    // WITHDRAW
-    function withdraw() {
-        const amount = parseFloat(document.getElementById("amount").value);
-        if (amount <= 0) return alert("Enter a valid amount");
-        if (amount > account.balance) return alert("Insufficient funds");
-
-        account.balance -= amount;
-        updateUI("Withdrew $" + amount.toFixed(2));
-    }
