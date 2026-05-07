@@ -1,85 +1,107 @@
 // ---------------------------
-// Simple Bank Functionality
+// Secure Digital Wallet
 // ---------------------------
 
-// Load saved data on startup
-let balance = parseFloat(localStorage.getItem("balance")) || 0;
-let historyList = JSON.parse(localStorage.getItem("history")) || [];
-
-// Display initial values
-document.getElementById("balance").innerText = balance.toFixed(2);
-renderHistory();
-
-// Deposit money
-function deposit() {
-    const amount = parseFloat(document.getElementById("amount").value);
-
-    if (isNaN(amount) || amount <= 0) {
-        alert("Enter a valid deposit amount");
-        return;
+// Require login
+function requireAuth() {
+    const user = localStorage.getItem("currentUser");
+    if (!user) {
+        alert("Unauthorized access blocked");
+        window.location.href = "login.html";
     }
+}
+requireAuth();
 
-    balance += amount;
-    saveTransaction("Deposit", amount);
-    updateUI();
+// Load user wallet
+const currentUser = localStorage.getItem("currentUser");
+const userKey = `wallet_${currentUser}`;
+
+let wallet = JSON.parse(localStorage.getItem(userKey)) || {
+    balance: 0,
+    history: []
+};
+
+document.getElementById("displayUser").innerText = currentUser;
+updateUI();
+
+// Simple SHA‑256 hashing (requires CryptoJS)
+function hash(str) {
+    return CryptoJS.SHA256(str).toString();
 }
 
-// Withdraw money
-function withdraw() {
-    const amount = parseFloat(document.getElementById("amount").value);
+// Atomic transaction handler
+function processTransaction(type, amount) {
+    amount = parseFloat(amount);
 
     if (isNaN(amount) || amount <= 0) {
-        alert("Enter a valid withdrawal amount");
+        alert("Invalid amount");
         return;
     }
 
-    if (amount > balance) {
+    if (type === "Withdraw" && amount > wallet.balance) {
         alert("Insufficient funds");
         return;
     }
 
-    balance -= amount;
-    saveTransaction("Withdraw", amount);
+    // Update balance
+    wallet.balance += type === "Deposit" ? amount : -amount;
+
+    // Create tamper‑proof transaction entry
+    const lastHash = wallet.history.length > 0 
+        ? wallet.history[0].hash 
+        : "GENESIS";
+
+    const entry = {
+        type,
+        amount,
+        date: new Date().toISOString(),
+        previousHash: lastHash,
+        hash: hash(type + amount + lastHash)
+    };
+
+    wallet.history.unshift(entry);
+
+    // Save atomically
+    localStorage.setItem(userKey, JSON.stringify(wallet));
+
     updateUI();
 }
 
-// Save transaction to history
-function saveTransaction(type, amount) {
-    const entry = {
-        type: type,
-        amount: amount,
-        date: new Date().toLocaleString()
-    };
-
-    historyList.unshift(entry); // newest first
-    localStorage.setItem("history", JSON.stringify(historyList));
+function deposit() {
+    const amount = document.getElementById("amount").value;
+    processTransaction("Deposit", amount);
 }
 
-// Update balance + history UI
+function withdraw() {
+    const amount = document.getElementById("amount").value;
+    processTransaction("Withdraw", amount);
+}
+
 function updateUI() {
-    document.getElementById("balance").innerText = balance.toFixed(2);
-    localStorage.setItem("balance", balance);
+    document.getElementById("balance").innerText = wallet.balance.toFixed(2);
     renderHistory();
 }
 
-// Render transaction history
 function renderHistory() {
     const historyDiv = document.getElementById("history");
     historyDiv.innerHTML = "";
 
-    if (historyList.length === 0) {
+    if (wallet.history.length === 0) {
         historyDiv.innerHTML = "<p>No transactions yet</p>";
         return;
     }
 
-    historyList.forEach(entry => {
+    wallet.history.forEach(entry => {
         const item = document.createElement("div");
         item.classList.add("history-item");
         item.innerHTML = `
             <strong>${entry.type}</strong>: $${entry.amount.toFixed(2)}
             <br>
             <small>${entry.date}</small>
+            <br>
+            <small>Hash: ${entry.hash.substring(0, 12)}...</small>
         `;
         historyDiv.appendChild(item);
     });
 }
+
