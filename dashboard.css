@@ -1,104 +1,471 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: "Poppins", sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
 }
 
 body{
-    background: linear-gradient(to bottom, #fffac0 0%, #ffec1d 100%);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+  background:linear-gradient(to bottom,#fffac0 0%,#ffec1d 100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
 }
 
 .container{
-    width:400px;
-    background:white;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 0 15px rgba(0,0,0,0.1);
+  width:430px;
+  max-width:100%;
+  background:white;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 0 15px rgba(0,0,0,.12);
 }
 
 .header{
-    text-align:center;
-    margin-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
 }
 
-.header h2{
-    font-weight:600;
+.header p,
+.balance-box p,
+.wallet-box p,
+.hint{
+  color:gray;
 }
 
-.header p{
-    color:gray;
+.hint{
+  font-size:13px;
+  margin-bottom:8px;
+  text-align:center;
+}
+
+.small-btn{
+  border:none;
+  border-radius:20px;
+  background:#eee;
+  padding:8px 13px;
+  cursor:pointer;
+  font-weight:600;
 }
 
 .card{
-    background:black;
-    color:white;
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:20px;
+  height:210px;
+  margin-bottom:18px;
+  perspective:1000px;
+  cursor:pointer;
 }
 
-.card-top{
-    display:flex;
-    justify-content:space-between;
-    font-size:14px;
+.card-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transition:transform .7s;
+  transform-style:preserve-3d;
 }
 
-.card-number{
-    font-size:20px;
-    letter-spacing:3px;
-    margin:20px 0;
+.card.flipped .card-inner{
+  transform:rotateY(180deg);
 }
 
+.card-face{
+  width:100%;
+  height:100%;
+  position:absolute;
+  backface-visibility:hidden;
+  background:#000;
+  color:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+
+.card-front{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.card-back{
+  transform:rotateY(180deg);
+}
+
+.stripe{
+  height:45px;
+  background:#222;
+  margin:5px -20px 25px;
+}
+
+.cvv-box{
+  background:white;
+  color:#0646b8;
+  border-radius:10px;
+  padding:10px;
+  text-align:right;
+}
+
+.cvv-box p{
+  color:#0646b8;
+  font-size:12px;
+}
+
+.back-text{
+  margin-top:25px;
+  text-align:center;
+  font-size:13px;
+  color:#ddd;
+}
+
+.card-top,
 .card-bottom{
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.card-top{font-size:14px;}
+.card-number{
+  font-size:20px;
+  letter-spacing:3px;
+  margin:22px 0;
+}
+.card-bottom{font-size:12px;}
+
+.wallet-box,
+.balance-box,
+.money-box,
+.details,
+.history-section,
+.achievements-section{
+  margin-bottom:18px;
+}
+
+.wallet-box,
+.achievements-section{
+  border:1px solid #eee;
+  border-radius:15px;
+  padding:15px;
+}
+
+.wallet-box h4{
+  word-break:break-all;
+  margin:8px 0 12px;
+}
+
+.btn,
+.actions button{
+  width:100%;
+  padding:11px;
+  border:none;
+  border-radius:20px;
+  background:black;
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
+}
+
+.btn:hover,
+.actions button:hover,
+.small-btn:hover{
+  transform:scale(1.04);
 }
 
 .balance-box{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.balance-box p{
-    color:gray;
+  text-align:center;
 }
 
 .balance-box h1{
-    font-size:32px;
+  font-size:34px;
 }
 
-.details{
-    margin-bottom:20px;
+.achievements-section h3{
+  margin-bottom:10px;
 }
 
-.detail-item{
-    display:flex;
-    justify-content:space-between;
-    margin:10px 0;
-    border-bottom:1px solid #eee;
-    padding-bottom:5px;
+.achievements{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.badge{
+  border-radius:14px;
+  padding:10px;
+  background:#f1f1f1;
+  color:#999;
+  font-size:13px;
+  font-weight:600;
+}
+
+.badge.unlocked{
+  background:#000;
+  color:white;
+}
+
+.money-box input{
+  width:100%;
+  padding:13px;
+  border:2px solid #ddd;
+  border-radius:20px;
+  outline:none;
+  margin-bottom:12px;
 }
 
 .actions{
-    display:flex;
-    justify-content:space-between;
+  display:flex;
+  gap:10px;
 }
 
-.actions button{
-    width:48%;
-    padding:10px;
-    border:none;
-    border-radius:20px;
-    background:black;
-    color:white;
-    cursor:pointer;
-    font-weight:600;
+.detail-item{
+  display:flex;
+  justify-content:space-between;
+  margin:10px 0;
+  border-bottom:1px solid #eee;
+  padding-bottom:6px;
+}
+
+.history{
+  max-height:150px;
+  overflow:auto;
+}
+
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  padding:8px 0;
+  font-size:14px;
+}
+
+.deposit{color:green;}
+.withdraw{color:red;}
+
+.toast{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%) translateY(-100px);
+  background:#000;
+  color:white;
+  padding:14px 20px;
+  border-radius:30px;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  transition:.4s;
+  z-index:99;
+}
+
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+}
+
+.card{
+  height:270px;
+}
+
+.bulldog-card-front{
+  padding:0;
+  overflow:hidden;
+  background:#ffd400;
+  color:#0646b8;
+  border-radius:15px;
+  border:1px solid #e0c300;
+}
+
+.school-card-top{
+  height:135px;
+  background:#050505;
+  display:grid;
+  grid-template-columns:1fr 105px;
+  color:#ffd400;
+}
+
+.school-card-left{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:8px;
+  text-align:center;
+}
+
+.school-card-left h2{
+  font-size:23px;
+  line-height:1;
+  color:#ffd400;
+  text-shadow:1px 1px 0 #000, 0 0 4px #ffe14d;
+  margin-bottom:3px;
+}
+
+.bulldog-logo{
+  font-size:36px;
+  line-height:1;
+  filter:drop-shadow(0 0 2px #ffd400);
+}
+
+.school-card-left h1{
+  font-size:25px;
+  line-height:1;
+  letter-spacing:1px;
+  color:#ffd400;
+  font-weight:800;
+  margin-top:4px;
+}
+
+.school-card-photo{
+  background:linear-gradient(135deg,#333,#111 55%,#ffd400);
+  border-left:2px solid #222;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-weight:800;
+}
+
+.mascot-head{
+  font-size:38px;
+  background:#111;
+  border:3px solid #ffd400;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:6px;
+}
+
+.school-card-photo span{
+  color:#ffd400;
+  letter-spacing:1px;
+}
+
+.paw-strip{
+  height:29px;
+  background:white;
+  color:#111;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  white-space:nowrap;
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+}
+
+.school-card-bottom{
+  position:relative;
+  min-height:106px;
+  background:linear-gradient(135deg,#ffcf00,#ffd900 70%,#ffc400);
+  padding:12px 14px;
+  color:#0646b8;
+  font-weight:800;
+}
+
+.school-card-name{
+  max-width:52%;
+  font-size:26px;
+  line-height:1.02;
+  word-break:break-word;
+}
+
+.school-card-issue{
+  position:absolute;
+  top:16px;
+  right:14px;
+  font-size:20px;
+  white-space:nowrap;
+}
+
+.school-card-iso{
+  position:absolute;
+  left:14px;
+  bottom:13px;
+  font-size:17px;
+  letter-spacing:.4px;
+}
+
+.school-card-iso span{
+  letter-spacing:1px;
+  color:#0646b8;
+  font-weight:800;
+}
+
+.transfer{color:#0b57d0;}
+
+.history-item small{
+  display:block;
+  color:gray;
+  font-size:11px;
+  font-weight:400;
+}
+
+@media(max-width:480px){
+  .card{height:250px;}
+  .school-card-top{height:125px;grid-template-columns:1fr 92px;}
+  .school-card-left h2{font-size:19px;}
+  .school-card-left h1{font-size:21px;}
+  .bulldog-logo{font-size:31px;}
+  .mascot-head{width:58px;height:58px;font-size:30px;}
+  .school-card-name{font-size:22px;}
+  .school-card-issue{font-size:17px;}
+  .school-card-iso{font-size:14px;}
+}
+
+.card-toggle{
+  position:absolute;
+  right:14px;
+  bottom:10px;
+  border:none;
+  border-radius:18px;
+  background:#000;
+  color:white;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.cvv-toggle{
+  margin-top:8px;
+  border:none;
+  border-radius:18px;
+  background:#000;
+  color:white;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.card-toggle:hover,
+.cvv-toggle:hover{
+  transform:scale(1.04);
+}
+
+@media(max-width:480px){
+  .school-card-iso{
+    font-size:12px;
+    bottom:40px;
+  }
+
+  .card-toggle{
+    left:14px;
+    right:auto;
+    bottom:10px;
+  }
+}
+
+
+#cardNumber,
+#cvvNumber{
+  color:#0646b8;
+  font-weight:800;
 }

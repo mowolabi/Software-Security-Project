@@ -1,70 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bulldog Wallet</title>
-<link rel="stylesheet" href="dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulldog Wallet Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
 </head>
-
 <body>
-
-<div class="container">
-
-    <div class="header">
-        <h2 id="username"></h2>
+  <main class="container">
+    <header class="header">
+      <div>
+        <h2>Welcome, <span id="username"></span></h2>
         <p>Account Overview</p>
-    </div>
+      </div>
+      <button id="logoutBtn" class="small-btn">Logout</button>
+    </header>
 
-    <div class="card">
-        <div class="card-top">
-            <span id="bank"></span>
-            <span id="network"></span>
-        </div>
+    <p class="hint">Click the card to flip it.</p>
 
-        <div class="card-number" id="cardNumber"></div>
-
-        <div class="card-bottom">
-            <div>
-                <p>Holder</p>
-                <h4 id="cardHolder"></h4>
+    <section class="card" id="bankCard">
+      <div class="card-inner">
+        <div class="card-face card-front bulldog-card-front">
+          <div class="school-card-top">
+            <div class="school-card-left">
+              <h2>Bowie State University</h2>
+              <div class="bulldog-logo">🐶</div>
+              <h1>BULLDOG CARD</h1>
             </div>
-            <div>
-                <p>Expires</p>
-                <h4 id="expiry"></h4>
+            <div class="school-card-photo">
+              <div class="mascot-head">🐾</div>
+              <span>BSU</span>
             </div>
-        </div>
-    </div>
+          </div>
 
-    <div class="balance-box">
-        <p>Balance</p>
-        <h1 id="balance"></h1>
-    </div>
+          <div class="paw-strip">🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾</div>
 
-    <div class="details">
-        <div class="detail-item">
-            <p>Account</p>
-            <h4 id="accountNumber"></h4>
+          <div class="school-card-bottom">
+            <div class="school-card-name" id="cardHolder"></div>
+            <div class="school-card-issue">Issue : <span id="cardExpiration">12/30</span></div>
+            <div class="school-card-iso">Card Number: <span id="cardNumber">6009420000222222</span></div>
+            <button id="toggleCardBtn" class="card-toggle" type="button">Show Card Info</button>
+          </div>
         </div>
 
-        <div class="detail-item">
-            <p>Routing</p>
-            <h4 id="routingNumber"></h4>
+        <div class="card-face card-back">
+          <div class="stripe"></div>
+          <div class="cvv-box">
+            <p>CVV</p>
+            <h4 id="cvvNumber">***</h4>
+            <button id="toggleCvvBtn" class="cvv-toggle" type="button">Show CVV</button>
+          </div>
+          <p class="back-text">Bulldog Wallet Secure Card</p>
         </div>
+      </div>
+    </section>
 
-        <div class="detail-item">
-            <p>Type</p>
-            <h4 id="accountType"></h4>
-        </div>
-    </div>
+    <section class="wallet-box">
+      <p>MetaMask Wallet</p>
+      <h4 id="walletAddress">Not connected</h4>
+      <button id="connectWalletBtn" class="btn">Connect MetaMask</button>
+    </section>
 
-    <div class="actions">
-        <button>Send</button>
-        <button>History</button>
-    </div>
+    <section class="balance-box">
+      <p>Balance</p>
+      <h1 id="balance">$0.00</h1>
+    </section>
 
-</div>
+    <section class="achievements-section">
+      <h3>Achievements</h3>
+      <div id="achievements" class="achievements"></div>
+    </section>
 
-<script src="dashboard.js"></script>
+    <section class="money-box">
+      <input id="amount" type="number" min="0" step="0.01" placeholder="Enter amount">
+      <input id="transferUsername" type="text" placeholder="Transfer to username">
+      <div class="actions">
+        <button id="depositBtn">Deposit</button>
+        <button id="withdrawBtn">Withdraw</button>
+        <button id="transferBtn">Transfer</button>
+      </div>
+    </section>
 
+    <section class="details">
+      <div class="detail-item">
+        <p>Account</p>
+        <h4 id="accountNumber">****2026</h4>
+      </div>
+      <div class="detail-item">
+        <p>Routing</p>
+        <h4>****0001</h4>
+      </div>
+      <div class="detail-item">
+        <p>Type</p>
+        <h4>Checking</h4>
+      </div>
+    </section>
+
+    <section class="history-section">
+      <h3>Transaction History</h3>
+      <div id="history" class="history"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="dashboard.js"></script>
 </body>
 </html>

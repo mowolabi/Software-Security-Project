@@ -1,27 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bulldog Wallet</title>
-<link rel="stylesheet" href="style.css"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulldog Wallet</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <main class="auth-page">
     <h1>Bulldog Wallet</h1>
-    <div class="wrapper">
-        <form action ="">
-            <div class="input-box">
-                <input type ="text" placeholder="Username" required>
-            </div>
 
-            <div class="input-box">
-                <input type ="pass" placeholder="Password" required>
-            </div>
+    <section class="wrapper">
+      <div class="tabs">
+        <button id="loginTab" class="tab active">Login</button>
+        <button id="signupTab" class="tab">Sign Up</button>
+      </div>
 
-            <button type="submit" class="btn">Login</button>
-        </form>
+      <form id="loginForm" class="form active">
+        <h2>Welcome Back</h2>
+        <div class="input-box">
+          <input type="text" id="loginUsername" placeholder="Username" required>
+        </div>
+        <div class="input-box">
+          <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <button type="button" id="forgotPasswordBtn" class="link-btn">Forgot password?</button>
+        <p id="loginMessage" class="message"></p>
+      </form>
+
+      <form id="signupForm" class="form">
+        <h2>Create Account</h2>
+        <div class="input-box">
+          <input type="text" id="signupName" placeholder="Full name" required>
+        </div>
+        <div class="input-box">
+          <input type="text" id="signupUsername" placeholder="Username" required>
+        </div>
+        <div class="input-box">
+          <input type="password" id="signupPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <p id="signupMessage" class="message"></p>
+      </form>
+
+      <form id="resetForm" class="form">
+        <h2>Reset Password</h2>
+        <p class="reset-note">Enter your username and choose a new password.</p>
+        <div class="input-box">
+          <input type="text" id="resetUsername" placeholder="Username" required>
+        </div>
+        <div class="input-box">
+          <input type="password" id="resetPassword" placeholder="New password" required>
+        </div>
+        <div class="input-box">
+          <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+        </div>
+        <button type="submit" class="btn">Update Password</button>
+        <button type="button" id="backToLoginBtn" class="link-btn">Back to login</button>
+        <p id="resetMessage" class="message"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
 </body>
-
 </html>
-
-
