@@ -22,8 +22,9 @@
           <input type="text" id="loginUsername" placeholder="Username" required>
         </div>
         <div class="input-box">
-          <input type="password" id="loginPassword" placeholder="Password" required>
+          <input type="password" id="loginPassword" placeholder="6+ chars, capital, symbol, number" required>
         </div>
+        <div id="recaptcha-container"></div>
         <button type="submit" class="btn">Login</button>
         <button type="button" id="forgotPasswordBtn" class="link-btn">Forgot password?</button>
         <p id="loginMessage" class="message"></p>
@@ -36,6 +37,9 @@
         </div>
         <div class="input-box">
           <input type="text" id="signupUsername" placeholder="Username" required>
+        </div>
+        <div class="input-box">
+          <input type="tel" id="signupPhone" placeholder="Phone Number (+1...)" required>
         </div>
         <div class="input-box">
           <input type="password" id="signupPassword" placeholder="Password" required>
@@ -51,7 +55,7 @@
           <input type="text" id="resetUsername" placeholder="Username" required>
         </div>
         <div class="input-box">
-          <input type="password" id="resetPassword" placeholder="New password" required>
+          <input type="password" id="resetPassword" placeholder="6+ chars, capital, symbol, number" required>
         </div>
         <div class="input-box">
           <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
@@ -63,6 +67,6 @@
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

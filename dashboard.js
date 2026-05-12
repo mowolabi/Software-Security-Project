@@ -213,15 +213,6 @@ function transfer(){
     return;
   }
 
-  if (amount >= 40) {
-   const proceed = confirm("You are trying to transfer $" + amount + ". Would you like to proceed?"); 
-
-  if(!proceed){
-    alert("Transfer canceled");
-  return;
-}
-  }  
-
   const recipientIndex = users.findIndex(user => user.username === recipientUsername);
   if(recipientIndex === -1){
     alert("No user found with that username.");
